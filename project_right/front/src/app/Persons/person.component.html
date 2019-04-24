@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content white-text">
+        <div class="row">
+          <div class="col s5">
+            <form #personForm="ngForm" (ngSubmit)="onSubmit(personForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="personService.selectedPerson._id">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="name" #name="ngModel" [(ngModel)]="personService.selectedPerson.name" placeholder="" required>
+                  <label>Name :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="gender" #gender="ngModel" [(ngModel)]="personService.selectedPerson.gender" placeholder="">
+                  <label>Gender :</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="personService.selectedPerson.phoneNumber" placeholder="">
+                  <label>Phone number</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="number" name="age" #age="ngModel" [(ngModel)]="personService.selectedPerson.age" placeholder="">
+                  <label>Age:</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <button class="btn btn-custom right" type="button" (click)="resetForm(personForm)">Reset</button>
+                  <button class="btn btn-custom right" type="submit" [disabled]="!personForm.valid">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col s7">
+              <table class="responsive-table highlight">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>gender</th>
+                      <th>phoneNumber</th>
+                      <th>age</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tr *ngFor="let per of personService.persons">
+                    <td>{{per.name}}</td>
+                    <td>{{per.gender}}</td>
+                    <td>{{per.phoneNumber}}</td>
+                    <td>{{per.age}}</td>
+                    <td>
+                        <a class="action-btn" (click)="onEdit(per)">
+                          <i class="material-icons">edit</i>
+                        </a>
+                        <a class="action-btn" (click)="onDelete(per._id,personForm)">
+                          <i class="material-icons">delete</i>
+                        </a>
+                      </td>
+                  </tr>
+                </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
